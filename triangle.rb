@@ -28,7 +28,14 @@ def triangle(a, b, c)
 =end
 
 #refactored code
-[:equilateral, :isosceles, :scalene].fetch([a,b,c].uniq.length - 1)
+sorted_sides = [a,b,c].sort
+if (a|b|c) <= 0
+	raise TriangleError, "The sides of a triangle cannot less than or equal to zero"
+elsif sorted_sides[0] + sorted_sides[1] <= sorted_sides[2]
+	raise TriangleError, "Two sides of a triangle must be greater than the third"
+else
+	[:equilateral, :isosceles, :scalene].fetch([a,b,c].uniq.length - 1)
+end
 
 end
 
